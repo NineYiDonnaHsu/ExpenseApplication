@@ -1,0 +1,13 @@
+﻿@model Expense
+
+<h1>支出詳情</h1>
+
+<div>
+    <p>標題: @Model.Title</p>
+    <p>金額: @Model.Amount</p>
+    <p>日期: @Model.Date.ToUniversalTime().ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</p>
+    <p>分類: @Model.Category</p>
+    <!-- 其他費用項目的詳細資訊 -->
+</div>
+
+<a asp-action="Index">回支出清單</a>

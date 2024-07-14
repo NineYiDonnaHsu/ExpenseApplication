@@ -1,0 +1,64 @@
+﻿@model List<Expense>
+<div class="container">
+    <h1 class="text-center">支出清單</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="get" action="/Expense/Search" class="mb-3">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label for="title">標題</label>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="Search by Title">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="startDate">開始日期</label>
+                        <input type="date" id="startDate" name="startDate" class="form-control" pattern="\d{4}-\d{2}-\d{2}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="endDate">結束日期</label>
+                        <input type="date" id="endDate" name="endDate" class="form-control" pattern="\d{4}-\d{2}-\d{2}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="category">類別</label>
+                        <select id="category" name="category" class="form-control">
+                            <option value="">不指定</option>
+                            <option value="食">食</option>
+                            <option value="衣">衣</option>
+                            <option value="住">住</option>
+                            <option value="行">行</option>
+                        </select>
+                    </div>
+                </div>
+                <label class="text-danger">@ViewData["SearchErrorMsg"]</label><br />
+                <button type="submit" class="btn btn-primary mt-3">查詢</button>
+            </form>
+            <a href="/Expense/Create" class="btn btn-primary mb-3">新增支出</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>標題</th>
+                        <th>金額</th>
+                        <th>日期</th>
+                        <th>類別</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var expense in Model)
+                    {
+                        <tr>
+                            <td>@expense.Title</td>
+                            <td>@expense.Amount</td>
+                            <td>@expense.Date.ToUniversalTime().ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td>@expense.Category</td>
+                            <td>
+                                <a href="/Expense/Edit/@expense.Id" class="btn btn-primary btn-sm">編輯</a>
+                                <a href="/Expense/Details/@expense.Id" class="btn btn-info btn-sm">詳細資料</a>
+                                <a href="/Expense/Delete/@expense.Id" class="btn btn-danger btn-sm">刪除</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

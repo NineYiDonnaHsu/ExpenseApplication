@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: postgres-expense-test
+    environment:
+      - POSTGRES_USER=tester
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=expense_test
+    ports:
+      - 5433:5432
